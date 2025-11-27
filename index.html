@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>RESONANCE - ProyectoFinal</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.4.0/p5.js"></script>
+    <script src="https://unpkg.com/ml5@0.12.2/dist/ml5.min.js"></script>
+</head>
+<body onclick="intentarAudio()">
+
+    <div id="start-screen" class="screen active">
+        <div class="title-box">
+            <h1 class="game-title">RESONANCE</h1>
+            <p class="subtitle">La Mazmorra del Eco</p>
+        </div>
+        
+        <div class="credits-box">
+            <p>DESARROLLADO POR:</p>
+            <ul class="team-list">
+                <li style="color: #00ff00; margin-top: 10px;">👤 Francisco Miguel Castañeda Melgarejo</li>
+            </ul>
+        </div>
+        
+        <button onclick="iniciarJuego()" class="btn-retro">PRESIONA START</button>
+        <button onclick="mostrarTutorial()" class="btn-retro btn-blue">¿CÓMO JUGAR?</button>
+        
+        <p class="instruction">Haz click en pantalla para activar sonido 🎵</p>
+    </div>
+
+    <div id="tutorial-screen" class="screen hidden">
+        <h2 class="game-title" style="font-size: 25px; color: #00ffff;">GUÍA DE COMBATE</h2>
+        <div class="tutorial-box">
+            <p>1. Presiona 🎙️ <span style="color:#0f0">DICTAR HECHIZO</span>.</p>
+            <p>2. Tu voz es tu arma:</p>
+            <ul>
+                <li>🗣️ <span style="color: #ff8800">GRAVE</span> = ⚔️ Espada</li>
+                <li>🗣️ <span style="color: #ff00ff">AGUDA</span> = ⚡ Magia</li>
+            </ul>
+            <p>3. Gana para recuperar vidas ❤️.</p>
+        </div>
+        <button onclick="cerrarTutorial()" class="btn-retro">ENTENDIDO</button>
+    </div>
+
+    <div id="game-container" class="screen hidden">
+        <div class="hud">
+            <div class="level-info">NIVEL <span id="nivel-txt">1</span></div>
+            <div class="enemy-name" id="nombre-enemigo">Slime</div>
+        </div>
+
+        <div class="battle-area">
+            <div class="health-container">
+                <div id="hp-enemigo-bar" class="health-fill"></div>
+            </div>
+
+            <div class="sprites">
+                <div class="character player">
+                    <img id="jugador-img" src="imagenes/protagonista.webp" class="pixel-art" alt="Mago">
+                    <div class="char-label" id="texto-vidas">TÚ (❤️❤️❤️❤️❤️)</div>
+                </div>
+                
+                <div class="character enemy">
+                    <img id="enemigo-img" src="imagenes/slime_verde.webp" class="pixel-art" alt="Enemigo">
+                    <div class="char-label">ENEMIGO</div>
+                </div>
+            </div>
+
+            <div class="action-container">
+                <button id="btn-action" onclick="activarEscucha()" class="btn-retro btn-small">
+                    🎙️ DICTAR HECHIZO
+                </button>
+            </div>
+
+            <div class="dialogue-box">
+                <p id="mensaje-juego">Cargando...</p>
+                <p id="estado-voz" class="voice-status">Esperando...</p>
+            </div>
+        </div>
+    </div>
+
+    <div id="end-screen" class="screen hidden">
+        <h1 id="titulo-final" class="game-title">RESULTADO</h1>
+        <div id="icono-final" style="font-size: 80px; margin: 20px;">🏆</div>
+        <p id="mensaje-final" class="subtitle">Mensaje final</p>
+        <button onclick="reiniciarJuego()" class="btn-retro">VOLVER AL INICIO</button>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
